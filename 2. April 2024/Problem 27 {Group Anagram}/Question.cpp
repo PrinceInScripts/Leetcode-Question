@@ -63,8 +63,16 @@ public:
         }
         
        }
-       for(int i=0;i<ans.size();i+++){
-        
+       int left=0;
+       int right=ans.size()-1;
+       while(left<=right){
+        if(ans[left].size()>ans[right].size()){
+            vector<string> temp=ans[left];
+            ans[left]=ans[right];
+            ans[right]=temp;
+        }
+        left++;
+        right--;
        }
        return ans;
     }
