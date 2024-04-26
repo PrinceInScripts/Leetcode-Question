@@ -38,25 +38,41 @@ Only one valid answer exists.
 
 #include <iostream>
 #include <vector>
+#include<algorithm>
 #include <limits.h>
 using namespace std;
 
 class Solution
 {
 public:
+    // vector<int> twoSum(vector<int>& nums, int target) {
     vector<int> twoSum(vector<int>& nums, int target) {
-        int n=nums.size();
-        vector<int> v;
-      for(int i=0;i<n;i++){
-        for(int j=i+1;j<n;j++){
-            if(nums[i]+nums[j]==target){
-            v.push_back(i);
-            v.push_back(j);
+        vector<int> sortedNums(nums.begin(),nums.end());
+        sort(sortedNums.begin(),sortedNums.end());
+        
+        int left=0;
+        int right=sortedNums.size()-1;
+
+        while(left<right){
+          int sum=sortedNums[left]+sortedNums[right];
+          
+          if(sum==target){
+            vector<int> ans;
+            for(int i=0;i<nums.size();i++){
+                 if(nums[i]==sortedNums[left] || nums[i]==sortedNums[right]){
+                  ans.push_back(i);
+                 }
             }
+            return ans;
+            
+          } else if(sum<target) left++;
+          else right--;
+
         }
-      }
-      return v;
-     
+
+        return {};
+
+
     }
 
 };
