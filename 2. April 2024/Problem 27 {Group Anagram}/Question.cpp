@@ -58,7 +58,7 @@ public:
                   strs[j]='0';
             }
             sort(str.begin(),str.end());
-        }
+        }        
         ans.push_back(str);
         }
         
