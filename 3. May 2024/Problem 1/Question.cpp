@@ -103,7 +103,7 @@ public:
       int sign=1;
       long long result=0;
 
-      while(i<s.size() && s[i]=='i'){
+      while(i<s.size() && s[i]==' '){
         i++;
       }
 
@@ -113,11 +113,9 @@ public:
 }
 
       while(i<s.size() && isdigit(s[i])){
-        cout<<isdigit(s[i]);
-        // cout<<(int)s[i]-48<<endl;
-        // result=result*10+ (int)s[i]-48;
-        // i++;
-        result = result * 10 + (s[i++] - '0');
+        result=result*10+ (int)s[i]-48;
+        i++;
+        
             if (result * sign < INT_MIN) return INT_MIN;
             if (result * sign > INT_MAX) return INT_MAX;
       }
