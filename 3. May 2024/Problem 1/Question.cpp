@@ -112,7 +112,7 @@ public:
     i++;
 }
 
-      while(i<s.size() && isdigit(s[i])){
+      while(i<s.size() && isdigit(s[i])){ 
         result=result*10+ (int)s[i]-48;
         i++;
         
