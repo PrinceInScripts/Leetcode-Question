@@ -85,6 +85,9 @@ public:
     */
 
    //3 way 
+    vector<int> twoSum(vector<int>& nums, int target) {
+        
+    }
 
 };
 
