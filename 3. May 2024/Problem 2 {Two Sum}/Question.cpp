@@ -58,7 +58,7 @@ public:
     //       }
     // }
 
-    // 2 way Using copy
+    // 2 way Two Pointer
     /* 
      vector<int> twoSum(vector<int>& nums, int target) {
           
