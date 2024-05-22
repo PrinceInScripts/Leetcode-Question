@@ -40,6 +40,7 @@ Only one valid answer exists.
 #include <vector>
 #include<algorithm>
 #include <limits.h>
+#include<unordered_map>
 using namespace std;
 
 class Solution
@@ -84,10 +85,45 @@ public:
     }
     */
 
-   //3 way 
+   //3 way two-pass has table
+   /*
     vector<int> twoSum(vector<int>& nums, int target) {
-        
+        unordered_map<int,int> nums_map;
+
+        for(int i=0;i<nums.size();i++){
+            nums_map[nums[i]]=i;
+        }
+
+        for(int i=0;i<nums.size();i++){
+            int complement=target-nums[i];
+
+            if(nums_map.find(complement) !=nums_map.end() && nums_map[complement] != i){
+                return {i,nums_map[complement]};
+            }
+        }
+
+        return {};
     }
+    */
+
+  //4 way one pass hash table
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int,int> nums_map;
+
+        for(int i=0;i<nums.size();i++){
+            int complement=target-nums[i];
+
+            if(nums_map.find(complement) !=nums_map.end()){
+                return {nums_map[complement],i};
+            }
+            nums_map[nums[i]]=i;
+        }
+
+        return {};
+    }
+
+    
+
 
 };
 
