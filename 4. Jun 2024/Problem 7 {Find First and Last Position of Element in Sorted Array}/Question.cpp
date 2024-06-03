@@ -94,8 +94,8 @@ public:
 
 int main()
 {
-    vector<int> nums={1};
-    int target=0;
+    vector<int> nums={5,7,7,8,8,10};
+    int target=8;
 
     Solution solution;
     vector<int> ans = solution.searchRange(nums,target);
