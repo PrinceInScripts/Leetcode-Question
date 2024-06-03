@@ -49,19 +49,20 @@ public:
        int lo=0;
        int hi=n-1;
 
-       vector<int> ans;
-       bool flag=false;
+       vector<int> ans={-1,-1};
+       
+       if(n==0) return ans;
 
        while(lo<=hi){
           int mid=lo+(hi-lo)/2;
 
           if(nums[mid]==target){
-            flag=true;
-                if(nums[mid-1]==target){
-                    hi=mid-1;
+            
+                if(mid==0 ||nums[mid-1]!=target){
+                    ans[0]=mid;
+                    break;
                 } else {
-                  ans.push_back(mid);
-                  break;
+                  hi=mid-1;
                 }
           } 
           else if(nums[mid]<target) lo=mid+1;
@@ -73,20 +74,19 @@ public:
           int mid=lo+(hi-lo)/2;
 
           if(nums[mid]==target){
-            flag=true;
-                if(nums[mid+1]==target){
-                    lo=mid+1;
-                } else{
-                    ans.push_back(mid);
+            
+                if(mid==n-1 ||nums[mid+1]!=target){
+                    ans[1]=mid;
                     break;
+                } else{
+                    lo=mid+1;
                 }
           } 
           else if(nums[mid]<target) lo=mid+1;
           else if(nums[mid]>target) hi=mid-1;
        }
 
-       if(flag) return ans;
-       else return {-1,-1};
+       return ans;
     }
    
 
@@ -94,8 +94,8 @@ public:
 
 int main()
 {
-    vector<int> nums={5,7,7,8,8,10};
-    int target=8;
+    vector<int> nums={1};
+    int target=0;
 
     Solution solution;
     vector<int> ans = solution.searchRange(nums,target);
