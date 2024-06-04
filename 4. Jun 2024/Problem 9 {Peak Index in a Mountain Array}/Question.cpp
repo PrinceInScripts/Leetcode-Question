@@ -48,7 +48,7 @@ class Solution
 {
 public:
     int peakIndexInMountainArray(vector<int>& arr) {
-      int lo=1;
+       int lo=1;
       int hi=arr.size()-2;
 
       while(lo<=hi){
@@ -63,8 +63,8 @@ public:
         }
         
       }
-
-      
+      return -1;
+            
     }
     int peakIndexInMountainArray1(vector<int>& arr) {
       int lo=1;
@@ -75,25 +75,24 @@ public:
         
         if(arr[mid]>arr[mid-1] && arr[mid]>arr[mid+1]){
             return mid;
-        }else if(arr[mid]>arr[mid+1] ) hi=mid-1;
-        else lo=mid+1;
-        
+        }else if(arr[mid]>arr[mid-1] ) lo=mid+1;
+        else hi=mid-1;
+        } 
+    
+        return -1;
       }
-
-      
-    }
    
 
 };
 
 int main()
 {
-   vector<int> nums={1,2,3,5,4,3,2};
+   vector<int> nums={1,2,3,4,5,4,3,2};
     
 
     Solution solution;
-   int ans = solution.peakIndexInMountainArray(nums);
-    cout<<ans<<endl;
+//    int ans = solution.peakIndexInMountainArray(nums);
+//     cout<<ans<<endl;
    int ans1 = solution.peakIndexInMountainArray1(nums);
     cout<<ans1;
 
