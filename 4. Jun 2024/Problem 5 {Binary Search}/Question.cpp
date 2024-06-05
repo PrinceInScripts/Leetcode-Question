@@ -42,7 +42,7 @@ public:
 
         if(nums[mid]==target) return mid;
         else if(nums[mid]<target) lo=mid+1;
-        else if(nums[mid]<target) hi=mid-1;
+        else if(nums[mid]>target) hi=mid-1;
        }
        return -1;
     }
@@ -53,7 +53,7 @@ public:
 int main()
 {
     vector<int> nums={-1,0,3,5,9,12};
-    int target=9;
+    int target=-1;
 
     Solution solution;
     int ans = solution.search(nums,target);
