@@ -30,31 +30,30 @@ class Solution
 {
 public:
   vector<string> commonChars(vector<string>& words) {
-        unordered_map<char,int> map;
+        vector<int> min_freq(26,INT_MAX);
+
+        for(auto& word:words){
+            vector<int> freq(26,0);
+            for(auto& ch:word){
+                freq[ch -'a']++;
+            }
+
+            for(int i=0;i<26;i++){
+                min_freq[i]=min(min_freq[i],freq[i]);
+            }
+        }
+
         vector<string> ans;
-
-        for(int i=0;i<words.size();i++){
-            string s=words[i];
-            for(int j=0;j<s.size();j++){
-                if(map.find(s[j]) != map.end()){
-                    map[s[j]]++;
-                } else {
-                    map[s[j]]=1;
-                }
+        for(int i=0;i<26;i++){
+            while(min_freq[i]>0){
+               ans.push_back(string(1,i+'a'));
+               min_freq[i]--;
             }
         }
 
-        for(auto& el:map){
-            while(el.second>=words.size()){
-                if(el.second>=words.size()){
-                ans.push_back(string(1, el.first));
-                el.second=el.second/2;
-            }
-            }
-            
-        }
-
-        return ans;
+       return ans;
+        
+        
     }
    
 
@@ -62,7 +61,7 @@ public:
 
 int main()
 {
-    vector<string> words={"acabcddd","bcbdbcbd","baddbadb","cbdddcac","aacbcccd","ccccddda","cababaab","addcaccd"};
+    vector<string> words={"bella","label","roller"};
     
 
     Solution solution;
