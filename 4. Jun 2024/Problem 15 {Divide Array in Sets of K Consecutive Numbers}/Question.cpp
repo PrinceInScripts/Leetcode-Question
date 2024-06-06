@@ -41,38 +41,31 @@ class Solution
 public:
       
    bool isPossibleDivide(vector<int>& nums, int k) {
-      int n=nums.size();
+    int n=nums.size();
+     if(n%k!=0) return false;
+     
+     unordered_map<int,int> nums_map;
 
-      if(n%k==0){
-        unordered_map<int,int> nums_map;
+     for(int i=0;i<n;i++){
+        nums_map[nums[i]]++;
+     }
 
-        for(int i=0;i<nums.size();i++){
-            nums_map[nums[i]]=i;
-        }
-        
-        for(int i=0;i<=n/k;i++){
-            int min=INT_MAX;
+     sort(nums.begin(),nums.end());
 
-            for(auto& el:nums_map){
-                cout<<min<<endl;
-                if(el.first>min){
-                    min=el.first;
-                }
-            }
-            cout<<min<<endl;
+     for(auto num:nums){
+         if(nums_map[num]==0) continue;
 
-            nums_map.erase(min);
-            if(nums_map.find(min+1) != nums_map.end() && nums_map.find(min+2) != nums_map.end()){
-                nums_map.erase(min+1);
-                nums_map.erase(min+2);
-            } else{
+         for(int i=0;i<k;i++){
+            if(nums_map[num+i]>0){
+                nums_map[num+i]--;
+            } else {
                 return false;
             }
-        }
+         }
+     }
 
-        return true;
-      }
-      else return false;
+     return true;
+
       
       
     }
@@ -84,8 +77,8 @@ public:
 
 int main()
 {
-   vector<int> arr={1,2,3,3,4,4,5,6};  
-   int k=4;  
+   vector<int> arr={3,3,2,2,1,1};  
+   int k=3;  
 
     Solution solution;
     bool ans = solution.isPossibleDivide(arr,k);
