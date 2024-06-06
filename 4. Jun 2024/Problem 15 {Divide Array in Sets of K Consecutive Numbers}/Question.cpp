@@ -33,6 +33,7 @@ Explanation: Each array should be divided in subarrays of size 3.
 #include <vector>
 #include<algorithm>
 #include <limits.h>
+#include<unordered_map>
 using namespace std;
 
 class Solution
@@ -42,7 +43,35 @@ public:
    bool isPossibleDivide(vector<int>& nums, int k) {
       int n=nums.size();
 
-      if(n%k==0) return true;
+      if(n%k==0){
+        unordered_map<int,int> nums_map;
+
+        for(int i=0;i<nums.size();i++){
+            nums_map[nums[i]]=i;
+        }
+        
+        for(int i=0;i<=n/k;i++){
+            int min=INT_MAX;
+
+            for(auto& el:nums_map){
+                cout<<min<<endl;
+                if(el.first>min){
+                    min=el.first;
+                }
+            }
+            cout<<min<<endl;
+
+            nums_map.erase(min);
+            if(nums_map.find(min+1) != nums_map.end() && nums_map.find(min+2) != nums_map.end()){
+                nums_map.erase(min+1);
+                nums_map.erase(min+2);
+            } else{
+                return false;
+            }
+        }
+
+        return true;
+      }
       else return false;
       
       
