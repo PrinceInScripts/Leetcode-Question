@@ -33,32 +33,73 @@ using namespace std;
 class Solution
 {
 public:
+    //Brute Force
+    /*
     int maxProfit(vector<int>& prices) {
-      int min=INT_MAX;
-      int max=INT_MIN;
-      int idx=-1;
+        int n=prices.size();
+        int maxProfit=0;
+      for(int i=0;i<n;i++){
+        for(int j=i+1;j<n;j++){
+            int profit=prices[j]-prices[i];
+            if(profit>maxProfit){
+                maxProfit=profit;
+            }
 
-      for(int i=0;i<prices.size();i++){
-        if(prices[i]<min){
-           min=prices[i];
-           idx=i;
         }
       }
 
-      if(idx==prices.size()) return 0;
-      
-      for(int i=idx;i<prices.size();i++){
-        if(prices[i]>max){
-           max=prices[i];
-        }
-      }
-
-     int ans=max-min;
-      return ans;
-      
-
+      return maxProfit;
       
     }
+    */
+
+   //One Pass
+   
+    int maxProfit(vector<int>& prices) {
+      int buy=prices[0];
+      int profit=0;
+
+      for(int i=0;i<prices.size();i++){
+        if(prices[i]<buy){
+            buy=prices[i];
+        } else if(prices[i]-buy>profit){
+            profit=prices[i]-buy;
+        }
+      }
+      return profit;
+      
+      
+    }
+
+
+    // int maxProfit(vector<int>& prices) {
+    //   int buy=prices[0];
+    //   int profit=0;
+
+    //   for(int i=0;i<prices.size();i++){
+    //     if(prices[i]<buy){
+    //         buy=prices[i];
+    //     } else if(prices[i]-buy>profit){
+    //         profit=prices[i]-buy;
+    //     }
+    //   }
+    //   return profit;
+      
+    // }
+    // int maxProfit(vector<int>& prices) {
+    //   int buy=prices[0];
+    //   int profit=0;
+
+    //   for(int i=0;i<prices.size();i++){
+    //     if(prices[i]<buy){
+    //         buy=prices[i];
+    //     } else if(prices[i]-buy>profit){
+    //         profit=prices[i]-buy;
+    //     }
+    //   }
+    //   return profit;
+      
+    // }
    
 
 };
