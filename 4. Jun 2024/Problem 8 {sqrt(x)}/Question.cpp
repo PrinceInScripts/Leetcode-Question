@@ -34,15 +34,17 @@ class Solution
 {
 public:
     int mySqrt(int x) {
-      int lo=0;
+      if(x==0) return 0;
+      int lo=1;
       int hi=x;
 
       while(lo<=hi){
         int mid=lo+(hi-lo)/2;
+        long long p=(long long)mid;
 
-        if((long long)(mid*mid)==(long long)x) return mid;
-        else if((long long)(mid*mid)>(long long)x) hi=mid-1;
-        else if((long long)(mid*mid)<(long long)x) lo=mid+1;
+        if((p*p)==x) return mid;
+        else if((p*p)>x) hi=mid-1;
+        else if((p*p)<x) lo=mid+1;
       }
 
       return hi;
