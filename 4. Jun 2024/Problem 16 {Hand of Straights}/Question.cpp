@@ -1,6 +1,6 @@
 
 
-/*
+/* 
 # 868. Hand of Straights
 */
 /*
