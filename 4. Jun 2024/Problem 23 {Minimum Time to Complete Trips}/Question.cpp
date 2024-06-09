@@ -65,7 +65,7 @@ public:
       }
 
       long long lo=1;
-      long long hi=((long long)mx*(long long)totalTrips)/(long long)n;
+      long long hi=((long long)mx*(long long)totalTrips);
       long long ans=-1;
 
       while(lo<=hi){
@@ -89,8 +89,8 @@ public:
 
 int main()
 {
-  vector<int> time={1,2,3};  
-  int totalTrips=5;
+  vector<int> time={9,7,10,9,10,9,10};  
+  int totalTrips=1;
 
     Solution solution;
     long long ans = solution.minimumTime(time,totalTrips);
