@@ -37,7 +37,7 @@ public:
        else false;
    }
       
-   bool judgeSquareSum(int c) {
+   bool judgeSquareSum1(int c) {
       int x=0;
       int y=c;
 
@@ -51,6 +51,24 @@ public:
       
       return false;
     }
+   bool judgeSquareSum(int c) {
+      int x=0;
+      int y=c;
+
+      while(x<=y){
+        if(isSquareRoot(x) && isSquareRoot(y)){
+            return true;
+        } else if(!isSquareRoot(y)){
+            y=(int)sqrt(y)*(int)sqrt(y);
+            x=c-y;
+        } else if(!isSquareRoot(x)){
+            x=((int)sqrt(x)+1)*((int)sqrt(x)+1);
+            y=c-x;
+        }
+      }
+      
+      return false;
+    }
 
 
    
@@ -59,7 +77,7 @@ public:
 
 int main()
 {
-   int n=5;  
+   int n=41;  
 
     Solution solution;
     bool ans = solution.judgeSquareSum(n);
