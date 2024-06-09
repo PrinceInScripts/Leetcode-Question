@@ -106,8 +106,8 @@ public:
 
 int main()
 {
-  vector<int> weights={3,2,2,4,1,4};  
-  int days=3;
+  vector<int> weights={1,2,3,1,1};  
+  int days=4;
 
     Solution solution;
     int ans = solution.shipWithinDays(weights,days);
