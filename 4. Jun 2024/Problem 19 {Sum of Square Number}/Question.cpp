@@ -39,7 +39,7 @@ public:
       
    bool judgeSquareSum(int c) {
       int x=0;
-      int y=c-1;
+      int y=c;
 
       while(x<=y){
         if(isSquareRoot(x) && isSquareRoot(y)){
