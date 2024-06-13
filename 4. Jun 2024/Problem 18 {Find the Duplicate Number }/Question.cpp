@@ -38,7 +38,8 @@ class Solution
 {
 public:
       
-  int findDuplicate(vector<int>& nums) {
+  //sorting
+  int findDuplicate1(vector<int>& nums) {
       int n=nums.size()-1;
       sort(nums.begin(),nums.end());
 
@@ -46,6 +47,32 @@ public:
         if(nums[i]==nums[i-1]){
             return nums[i];
         }
+      }
+      return -1;
+      
+    }
+    //by sum
+  int findDuplicate2(vector<int>& nums) {
+      int n=nums.size();
+      int sum=n*(n-1);
+      sum=sum/2;
+      int s=0;
+      for(int i=0;i<n;i++){
+          s=s+nums[i];
+      }
+      s=s-sum;
+      return s;
+      
+    }
+    //by cycle sort
+  int findDuplicate(vector<int>& nums) {
+      int n=nums.size();
+      
+      int i=0;
+      while(i<n){
+        int correctIdx=nums[i];
+        if(nums[correctIdx]==nums[i]) return nums[i];
+        else swap(nums[correctIdx],nums[i]);
       }
       return -1;
       
@@ -58,13 +85,17 @@ public:
 
 int main()
 {
-   vector<int> arr={1,3,4,2,2};  
+   vector<int> arr={3,3,3,3,3};  
    int target=7;  
 
     Solution solution;
+    int ans1 = solution.findDuplicate1(arr);
+    int ans2 = solution.findDuplicate2(arr);
     int ans = solution.findDuplicate(arr);
     
-    cout<<ans;
+    cout<<ans1<<endl;
+    cout<<ans2<<endl;
+    cout<<ans<<endl;
     return 0;
     
 }
