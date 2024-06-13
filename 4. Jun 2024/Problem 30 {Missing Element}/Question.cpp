@@ -36,7 +36,7 @@ class Solution
 {
 public:
    
-  int missingNumber(vector<int>& nums) {
+  int missingNumber1(vector<int>& nums) {
         int n=nums.size();
         vector<bool> check(n+1,false);
 
@@ -50,6 +50,28 @@ public:
         }
         return -1;
 }
+  int missingNumber2(vector<int>& nums) {
+        int n=nums.size();
+        int actualSum=n*(n+1)/2;
+        int sum=0;
+        for(int i=0;i<n;i++){
+            sum+=nums[i];
+        }
+        return (actualSum-sum);
+}
+  int missingNumber(vector<int>& nums) {
+        int n=nums.size();
+        int i=0;
+        while(i<n){
+            int correctIdx=nums[i];
+            if(i==correctIdx || nums[i]==n) i++;
+            else swap(nums[i],nums[correctIdx]);
+        }
+        for(int i=0;i<n;i++){
+            if(i!=nums[i]) return i;
+        }
+        return n;
+}
 
 
    
@@ -58,12 +80,16 @@ public:
 
 int main()
 {
-    vector<int> nums={3,0,1};
+    vector<int> nums={0,1};
 
     Solution solution;
     int ans = solution.missingNumber(nums);
+    int ans1 = solution.missingNumber1(nums);
+    int ans2 = solution.missingNumber2(nums);
     
-    cout<<ans;
+    cout<<ans<<endl;
+    cout<<ans1<<endl;
+    cout<<ans2<<endl;
     return 0;
     
 }
