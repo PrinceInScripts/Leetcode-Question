@@ -36,7 +36,7 @@ public:
         int i=0;
         while(i<n){
             int correctIdx=nums[i]-1;
-            if(nums[i]==nums[correctIdx]) i++;
+            if(nums[i]==nums[correctIdx] || i==correctIdx) i++;
             else swap(nums[i],nums[correctIdx]);
         }
         for(int i=0;i<n;i++){
