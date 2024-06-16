@@ -1,7 +1,7 @@
 
 
 /*
-# 2037. Time needed to buy tickets
+# 2073. Time needed to buy tickets
 */
 /*
 There are n people in a line queuing to buy tickets, where the 0th person is at the front of the line and the (n - 1)th person is at the back of the line.

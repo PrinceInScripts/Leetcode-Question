@@ -1,5 +1,5 @@
 /*
-# 15. Transpose Matrix
+# 867. Transpose Matrix
 */
 /*
 Given a 2D integer array matrix, return the transpose of matrix.

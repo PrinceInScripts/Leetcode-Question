@@ -1,5 +1,5 @@
 /*
-# 74. Search a 2D matrix
+# 204. Search a 2D matrix
 */
 /*
 You are given an m x n integer matrix matrix with the following two properties:
