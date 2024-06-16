@@ -55,39 +55,36 @@ using namespace std;
 class Solution
 {
 public:
-  bool peakElement(vector<int>& arr,int lo,int hi){
-     while(lo<=hi){
-        int mid=lo+(hi-lo)/2;
-
-        if(mid>lo && mid<hi && arr[mid]>arr[mid-1] && arr[mid]>arr[mid+1]){
-            return true;
-        }
-
-        if(mid>lo && arr[mid]<=arr[mid-1]) hi=mid-1;
-        else lo=mid+1;
-     }
-     return false;
+  bool isPeak(vector<int>& arr,int idx){
+    if(idx>0 && idx<arr.size()-1 && arr[idx]>arr[idx-1] && arr[idx]>arr[idx+1]){
+        return true;
+    }else {
+        return false;
+    }
   }
 
-  void updateELement(vector<int>& arr,int idx,int val){
-     arr[idx]=val;
-  }
-   
   vector<int> countOfPeaks(vector<int>& nums, vector<vector<int>>& queries) {
     vector<int> ans;
-      for(int i=0;i<queries.size();i++){
-         if(queries[i][0]==1){
-            if( peakElement(nums,queries[i][1],queries[i][2])){
-                 ans.push_back(1);
-             } else {
-                ans.push_back(0);
-             }
-         } else if(queries[i][0]==2){
-             updateELement(nums,queries[i][1],queries[i][2]);
-         }
-      }
+    
+    for(auto& query:queries){
+        if(query[0]==1){
+            int lo=query[1]+1;
+            int hi=query[2]-1;
+            int count=0;
 
-      return ans;
+            for(int i=lo;i<=hi;i++){
+                if(isPeak(nums,i)){
+                    count++;
+                }
+            }
+            ans.push_back(count);
+        } else if(query[0]==2){
+            int index=query[1];
+            int value=query[2];
+            nums[index]=value;
+        }
+    }
+    return ans;
        
        
 }
