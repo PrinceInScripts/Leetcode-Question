@@ -40,11 +40,34 @@ class Solution
 public:
    
  
-  int climbStairs(int n) {
+  int climbStairs2(int n) {
       if(n==1) return 1;
       if(n==2) return 2;
 
       return climbStairs(n-1)+climbStairs(n-2);
+}
+int helper(int n,unordered_map<int,int>& memo){
+    if(n<=1) return 1;
+
+    if(memo.find(n) != memo.end()) return memo[n];
+
+    memo[n]=helper(n-1,memo)+helper(n-2,memo);
+    return memo[n];
+}
+  int climbStairs1(int n) {
+     unordered_map<int,int> memo;
+     return helper(n,memo);
+}
+  int climbStairs(int n) {
+     if(n<=1) return 1;
+
+     int curr=1,prev=1;
+     for(int i=2;i<=n;i++){
+        int temp=curr;
+        curr=curr+prev;
+        prev=temp;
+     }
+     return curr;
 }
 
 
@@ -58,8 +81,12 @@ int main()
 
     Solution solution;
     int ans = solution.climbStairs(num);
+    int ans1 = solution.climbStairs1(num);
+    int ans2 = solution.climbStairs2(num);
    
-    cout<<ans;
+    // cout<<ans;
+    // cout<<ans1;
+    cout<<ans2;
     return 0;
     
 }
