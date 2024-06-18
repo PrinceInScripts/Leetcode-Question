@@ -80,7 +80,7 @@ public:
 
 int main()
 {
-    vector<int> nums={0,1};
+    vector<int> nums={7,8,9,11,12};
 
     Solution solution;
     int ans = solution.missingNumber(nums);
