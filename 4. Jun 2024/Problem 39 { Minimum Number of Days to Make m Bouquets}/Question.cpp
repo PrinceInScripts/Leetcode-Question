@@ -73,7 +73,7 @@ public:
            return false;
    }
 
-   int minDays(vector<int>& bloomDay, int m, int k) {
+   int minDays1(vector<int>& bloomDay, int m, int k) {
     if(m*k>bloomDay.size()) return -1;
       int lo=0;
       int hi=1e9;
@@ -94,6 +94,57 @@ public:
 
     }
 
+    bool isPossibleMakeBouquets(vector<int>& bloomDay,int m,int k,int day){
+       int total=0;
+       int count=0;
+       for(int i=0;i<bloomDay.size();i++){
+          if(bloomDay[i]<=day){
+            count++;
+          } else{
+            count=0;
+          }
+          if(count==k){
+             total++;
+             count=0;
+          }
+
+          if(total>=m){
+            return true;
+          }
+       }
+       return false;
+       
+    }
+
+
+   int minDays(vector<int>& bloomDay, int m, int k) {
+      if(m*k>bloomDay.size()) return -1;
+      int min=INT_MAX;
+      int max=INT_MIN;
+      for(int val:bloomDay){
+        if(val<min) min=val;
+        if(val>max) max=val;
+      }
+      int lo=min;
+      int hi=max;
+      int ans=0;
+      while(lo<=hi){
+        int mid=lo+(hi-lo)/2;
+        if(isPossibleMakeBouquets(bloomDay,m,k,mid)){
+            ans=mid;
+            hi=mid-1;
+        }else{
+            lo=mid+1;
+        }
+
+
+      }
+      return lo;
+
+    }
+
+
+
 
    
 
@@ -101,7 +152,7 @@ public:
 
 int main()
 {
-  vector<int> bloomDay = {7,7,7,7,12,7,7};
+  vector<int> bloomDay = {7,7,7,7,12,7};
   int m = 2;
   int k = 3;
 
