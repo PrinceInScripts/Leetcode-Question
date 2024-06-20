@@ -67,7 +67,7 @@ public:
 
    }
    int maxDistance(vector<int>& position, int m) {
-     if(m>=position.size()) return -1;
+     if(m>=position.size()) return -1; 
      int n=position.size();
      sort(position.begin(),position.end());
      int lo=1;
