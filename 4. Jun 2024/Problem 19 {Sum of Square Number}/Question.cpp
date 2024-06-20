@@ -25,6 +25,7 @@ Output: false
 #include<algorithm>
 #include <limits.h>
 #include<cmath>
+#include<unordered_set>
 using namespace std;
 
 class Solution
@@ -81,6 +82,22 @@ public:
       }
       return false;
     }
+   bool judgeSquareSum3(int c) {
+      unordered_set<int> squares;
+
+      int max=(long)sqrt(c);
+
+      for(int i=0;i<=max;i++){
+        squares.insert(i*i);
+      }
+
+      for(int i=0;i<=max;i++){
+       if(squares.count(c-i*i)) return true;
+
+      }
+      return false;
+    }
+    
 
 
    
@@ -94,9 +111,11 @@ int main()
     Solution solution;
     bool ans = solution.judgeSquareSum(n);
     bool ans1 = solution.judgeSquareSum2(n);
+    bool ans2 = solution.judgeSquareSum3(n);
     
     cout<<ans<<endl;
-    cout<<ans1;
+    cout<<ans1<<endl;
+    cout<<ans2<<endl;
     return 0;
     
 }
