@@ -69,6 +69,18 @@ public:
       
       return false;
     }
+   bool judgeSquareSum2(int c) {
+      int i=0;
+      int j=(int)sqrt(c);
+
+      while(i<=j){
+         int sum=i*i+j*j;
+         if(sum==c) return true;
+         else if(sum<c) i++;
+         else j--;
+      }
+      return false;
+    }
 
 
    
@@ -81,8 +93,10 @@ int main()
 
     Solution solution;
     bool ans = solution.judgeSquareSum(n);
+    bool ans1 = solution.judgeSquareSum2(n);
     
-    cout<<ans;
+    cout<<ans<<endl;
+    cout<<ans1;
     return 0;
     
 }
