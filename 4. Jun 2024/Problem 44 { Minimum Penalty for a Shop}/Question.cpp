@@ -52,8 +52,8 @@ using namespace std;
 class Solution
 {
 public:
-
-    int bestClosingTime(string customers) {
+    //TLT Error 
+    int bestClosingTime1(string customers) {
      int n=customers.size();
      vector<int> prefix(n+1);
      vector<int> suffix(n+1);
@@ -76,6 +76,31 @@ public:
      for(int i=0;i<prefix.size();i++){
           if(mn==prefix[i]) return i;
      }
+
+    }
+    int bestClosingTime(string customers) {
+     int n=customers.size();
+     int prefix[n+1];
+     int suffix[n+1];
+     prefix[0]=0;
+     for(int i=0;i<n;i++){
+        prefix[i+1]=prefix[i] + ((customers[i]=='N') ? 1 : 0);
+     }
+     suffix[n]=0;
+     for(int i=n-1;i>=0;i--){
+        suffix[i]=suffix[i+1] + ((customers[i]=='Y') ? 1 : 0);
+     }
+     int mn=n;
+     for(int i=0;i<n+1;i++){
+        prefix[i]+=suffix[i];
+        mn=min(mn,prefix[i]);
+     }
+
+     for(int i=0;i<n+1;i++){
+        if(prefix[i]==mn) return i;
+     }
+     return -1;
+    
 
     }
    
