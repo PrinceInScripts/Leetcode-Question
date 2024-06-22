@@ -36,30 +36,46 @@ public:
 
    vector<int> productExceptSelf(vector<int>& nums) {
      int n=nums.size();
-     vector<int> prefixProd(nums.begin(),nums.end());
-     vector<int> suffixProd(nums.begin(),nums.end());
+     vector<int> prefixProd(n);
+     int prod=nums[0];
+     prefixProd[0]=1;
      for(int i=1;i<n;i++){
-        prefixProd[i]*=prefixProd[i-1];
+        prefixProd[i]=prod;
+        prod*=nums[i];
      }
+     prod=nums[n-1];
      for(int i=n-2;i>=0;i--){
-        suffixProd[i]*=suffixProd[i+1];
+        prefixProd[i]*=prod;
+        prod*=nums[i];
+     }
+     
+    
+     return prefixProd;
+
+    }
+   vector<int> productExceptSelf2(vector<int>& nums) {
+     int n=nums.size();
+     vector<int> prefixProd(n);
+     vector<int> suffixProd(n);
+     vector<int> ans(n);
+     int prod=nums[0];
+     prefixProd[0]=1;
+     for(int i=1;i<n;i++){
+        prefixProd[i]=prod;
+        prod*=nums[i];
+     }
+     prod=nums[n-1];
+     suffixProd[n-1]=1;
+     for(int i=n-2;i>=0;i--){
+        suffixProd[i]=prod;
+        prod*=nums[i];
      }
      
      for(int i=0;i<n;i++){
-        if(suffixProd[i]>prefixProd[i])
-            nums[i]=suffixProd[i]/prefixProd[i];
-        else nums[i]=prefixProd[i]/suffixProd[i];
-        
+        ans[i]=prefixProd[i]*suffixProd[i];
      }
-     for(int el:prefixProd){
-        cout<<el<<" ";
-     }
-     cout<<endl;
-     for(int el:suffixProd){
-        cout<<el<<" ";
-     }
-     cout<<endl;
-     return nums;
+    
+     return ans;
 
     }
   vector<int> productExceptSelf1(vector<int>& nums) {
