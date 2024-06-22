@@ -34,15 +34,35 @@ class Solution
 {
 public:
 
-   vector<int> runningSum1(vector<int>& nums) {
-     vector<int> ans(nums.size(),0);
-     ans[0]=nums[0];
-     for(int i=1;i<ans.size();i++){
-         ans[i]=ans[i-1]+nums[i];
+   vector<int> productExceptSelf(vector<int>& nums) {
+     int n=nums.size();
+     vector<int> prefixProd(nums.begin(),nums.end());
+     vector<int> suffixProd(nums.begin(),nums.end());
+     for(int i=1;i<n;i++){
+        prefixProd[i]*=prefixProd[i-1];
      }
-      return ans;
+     for(int i=n-2;i>=0;i--){
+        suffixProd[i]*=suffixProd[i+1];
+     }
+     
+     for(int i=0;i<n;i++){
+        if(suffixProd[i]>prefixProd[i])
+            nums[i]=suffixProd[i]/prefixProd[i];
+        else nums[i]=prefixProd[i]/suffixProd[i];
+        
+     }
+     for(int el:prefixProd){
+        cout<<el<<" ";
+     }
+     cout<<endl;
+     for(int el:suffixProd){
+        cout<<el<<" ";
+     }
+     cout<<endl;
+     return nums;
+
     }
-  vector<int> productExceptSelf(vector<int>& nums) {
+  vector<int> productExceptSelf1(vector<int>& nums) {
     int n=nums.size();
       int prod=1;
       int prod2=1;
