@@ -1,0 +1,1 @@
+satisfaction[i]*k

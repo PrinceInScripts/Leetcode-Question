@@ -43,7 +43,7 @@ using namespace std;
 class Solution
 {
 public:
-    int maxSatisfaction(vector<int>& satisfaction) {
+    int maxSatisfaction1(vector<int>& satisfaction) {
       int n=satisfaction.size();
       int mx=INT_MIN;
       sort(satisfaction.begin(),satisfaction.end());
@@ -59,6 +59,35 @@ public:
       if(mx<0) return 0;
       else return mx;
     }
+    int maxSatisfaction(vector<int>& satisfaction) {
+      int n=satisfaction.size();
+      int idx=-1;
+
+      sort(satisfaction.begin(),satisfaction.end());
+      int suffixSum[n];
+
+      suffixSum[n-1]=satisfaction[n-1];
+      for(int i=n-2;i>=0;i--){
+        suffixSum[i]=suffixSum[i+1]+satisfaction[i];
+      }
+
+      for(int i=0;i<n;i++){
+       if(suffixSum[i]>=0){
+        idx=i;
+         break;
+       }
+      }
+
+      if(idx==-1) return 0;
+      int maxSum=0;
+      int k=1;
+      for(int i=idx;i<n;i++){
+        maxSum+=(satisfaction[i]*k);
+        k++;
+      }
+      return maxSum;
+     
+    }
     
    
 };
@@ -66,8 +95,8 @@ public:
 int main()
 {
 //   vector<int> satisfaction ={4,3,2};
-//   vector<int> satisfaction ={-1,-8,0,5,-9};
-  vector<int> satisfaction ={-1,-4,-5};
+  vector<int> satisfaction ={-1,-8,0,5,-9};
+//   vector<int> satisfaction ={-1,-4,-5};
 
     Solution solution;
     int ans = solution.maxSatisfaction(satisfaction);
