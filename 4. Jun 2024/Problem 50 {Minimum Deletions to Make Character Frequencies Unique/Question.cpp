@@ -38,12 +38,13 @@ Note that we only care about characters that are still in the string at the end 
 #include<algorithm>
 #include<cmath>
 #include<unordered_map>
+#include<unordered_set>
 using namespace std;
 
 class Solution {
 public:
      
-    int minDeletions(string s) {
+    int minDeletions1(string s) {
         unordered_map<char,int> map;
         vector<int> freq;
 
@@ -73,10 +74,56 @@ public:
         }
 
         return minDelCount;
-
+        
+    }
+    int minDeletions2(string s) {
+        unordered_map<char,int> map;
         
 
+        for(char c:s ){
+            map[c]++;
+        }
 
+        unordered_set<int> usedFreq;
+        int deletion=0;
+
+        for(auto& el:map){
+            int freq=el.second;
+
+            while(freq>0 && !usedFreq.insert(freq).second){
+                 freq--;
+                 deletion++;
+            }
+        }
+
+        return deletion;
+        
+    }
+    int minDeletions(string s) {
+        unordered_map<char,int> map;
+        
+
+        for(char c:s ){
+            map[c]++;
+        }
+
+        vector<int> freq;
+        int deletion=0;
+
+        for(auto& el:map){
+           freq.push_back(el.second);           
+        }
+
+        sort(freq.begin(), freq.end(), greater<int>());
+         for (int i = 1; i < freq.size(); ++i) {
+            if (freq[i] >= freq[i - 1]) {
+                int newFreq = max(0, freq[i - 1] - 1);
+                deletion += freq[i] - newFreq;
+                freq[i] = newFreq;
+            }
+        }
+
+        return deletion;
         
     }
    
