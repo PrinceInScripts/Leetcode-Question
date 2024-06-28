@@ -43,6 +43,28 @@ public:
       int minSubArrayLen(int target, vector<int>& nums) {
           int n=nums.size();
           int minLen=INT_MAX;
+                    
+          int i=0;
+          int j=0;
+          int sum=0;
+          while(j<n){
+            sum+=nums[j];
+            while(sum>=target){
+                int len=j-i+1;
+                minLen=min(minLen,len);
+                sum-=nums[i];
+                i++;
+            }
+           
+            j++;
+          }
+          if(minLen==INT_MAX) return 0;
+          return minLen;
+         
+      }
+      int minSubArrayLen1(int target, vector<int>& nums) {
+          int n=nums.size();
+          int minLen=INT_MAX;
           bool flag=false;
 
           for(int i=0;i<n;i++){
