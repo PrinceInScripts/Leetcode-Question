@@ -1,36 +1,31 @@
 
 
 /*
-# 1493. Longest Subarray of 1's After Deleting One Element
+# 713. Subarray Product Less Than K
 */
 /*
-Given a binary array nums, you should delete one element from it.
-
-Return the size of the longest non-empty subarray containing only 1's in the resulting array. Return 0 if there is no such subarray.
+Given an array of integers nums and an integer k, return the number of contiguous subarrays where the product of all the elements in the subarray is strictly less than k.
 
  
 
 Example 1:
 
-Input: nums = [1,1,0,1]
-Output: 3
-Explanation: After deleting the number in position 2, [1,1,1] contains 3 numbers with value of 1's.
+Input: nums = [10,5,2,6], k = 100
+Output: 8
+Explanation: The 8 subarrays that have product less than 100 are:
+[10], [5], [2], [6], [10, 5], [5, 2], [2, 6], [5, 2, 6]
+Note that [10, 5, 2] is not included as the product of 100 is not strictly less than k.
 Example 2:
 
-Input: nums = [0,1,1,1,0,1,1,0,1]
-Output: 5
-Explanation: After deleting the number in position 4, [0,1,1,1,1,1,0,1] longest subarray with value of 1's is [1,1,1,1,1].
-Example 3:
-
-Input: nums = [1,1,1]
-Output: 2
-Explanation: You must delete one element.
+Input: nums = [1,2,3], k = 0
+Output: 0
  
 
 Constraints:
 
-1 <= nums.length <= 105
-nums[i] is either 0 or 1.
+1 <= nums.length <= 3 * 104
+1 <= nums[i] <= 1000
+0 <= k <= 106
 
  
 */
