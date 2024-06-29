@@ -1,32 +1,40 @@
 
 
 /*
-# 1343. Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold
+# 2302.  Count Subarrays With Score Less Than K
 */
 /*
 
-Given an array of integers arr and two integers k and threshold, return the number of sub-arrays of size k and average greater than or equal to threshold.
+The score of an array is defined as the product of its sum and its length.
+
+For example, the score of [1, 2, 3, 4, 5] is (1 + 2 + 3 + 4 + 5) * 5 = 75.
+Given a positive integer array nums and an integer k, return the number of non-empty subarrays of nums whose score is strictly less than k.
+
+A subarray is a contiguous sequence of elements within an array.
 
  
 
 Example 1:
 
-Input: arr = [2,2,2,2,5,5,5,8], k = 3, threshold = 4
-Output: 3
-Explanation: Sub-arrays [2,5,5],[5,5,5] and [5,5,8] have averages 4, 5 and 6 respectively. All other sub-arrays of size 3 have averages less than 4 (the threshold).
+Input: nums = [2,1,4,3,5], k = 10
+Output: 6
+Explanation:
+The 6 subarrays having scores less than 10 are:
+- [2] with score 2 * 1 = 2.
+- [1] with score 1 * 1 = 1.
+- [4] with score 4 * 1 = 4.
+- [3] with score 3 * 1 = 3. 
+- [5] with score 5 * 1 = 5.
+- [2,1] with score (2 + 1) * 2 = 6.
+Note that subarrays such as [1,4] and [4,3,5] are not considered because their scores are 10 and 36 respectively, while we need scores strictly less than 10.
 Example 2:
 
-Input: arr = [11,13,17,23,29,31,7,5,2,3], k = 3, threshold = 5
-Output: 6
-Explanation: The first 6 sub-arrays of size 3 have averages greater than 5. Note that averages are not integers.
- 
-
-Constraints:
-
-1 <= arr.length <= 105
-1 <= arr[i] <= 104
-1 <= k <= arr.length
-0 <= threshold <= 104
+Input: nums = [1,1,1], k = 5
+Output: 5
+Explanation:
+Every subarray except [1,1,1] has a score less than 5.
+[1,1,1] has a score (1 + 1 + 1) * 3 = 9, which is greater than 5.
+Thus, there are 5 subarrays having scores less than 5.
  
 */
 
@@ -44,6 +52,21 @@ class Solution {
 public:   
    
     long long countSubarrays(vector<int>& nums, long long k) {
+         int n=nums.size();
+         long long count=0,i=0,j=0,sum=0;
+
+         for(j=0;j<n;j++){
+            sum+=nums[j];
+
+            while(sum*(j-i+1)>=k){
+                sum-=nums[i];
+                i++;
+            }
+            count+=(j-i+1);
+         }
+         return count;
+    }
+    long long countSubarrays1(vector<int>& nums, long long k) {
          int n=nums.size();
          long long count=0;
          for(int i=0;i<n;i++){
