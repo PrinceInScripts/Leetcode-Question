@@ -52,17 +52,15 @@ public:
         if(s.size()==0) return 0;
         unordered_map<char,int> freq;
         int i=0,j=0,maxLen=INT_MIN;
-        while(j<s.size()){
-            if(freq[s[j]]==1){
-               maxLen=max(maxLen,j-i);
-               i=j;
-               j++;
-            } else {
-                freq[s[j]]=1;
-                j++;
+        for(j=0;j<s.size();j++){
+            while(freq[s[j]]>0){
+                maxLen=max(maxLen,j-i);
+                freq[s[i]]--;
+                i++;
             }
+            freq[s[j]]++;
         }
-
+        maxLen=max(maxLen,j-i);
         return maxLen;
     }
     
@@ -73,7 +71,7 @@ public:
 
 
 int main(){
-     string s="abcabcbb";
+     string s="pwwkew";
  
     Solution solution; 
     int ans=solution.lengthOfLongestSubstring(s);
