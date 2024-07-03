@@ -59,7 +59,7 @@ using namespace std;
 class Solution {
 public:   
    
-     string clearDigits(string s) {
+     string clearDigits1(string s) {
           int idx=-1;
          for(int i=0;i<s.size();i++){
             if(s[i]>=48 && s[i]<=57){
@@ -75,6 +75,19 @@ public:
          }
         return "";
       }
+
+      string clearDigits(string s) {
+        string ans;
+        for(auto c:s){
+            if(isdigit(c)){
+                if(!ans.empty() && isalnum(ans.back())){
+                    ans.pop_back();
+                }
+            } else ans+=c;
+        }
+        return ans;
+    }
+
       
      
     
@@ -83,7 +96,7 @@ public:
 
 
 int main(){
-  string s="c8f";
+  string s="cf8";
  
     Solution solution; 
    string ans=solution.clearDigits(s);
