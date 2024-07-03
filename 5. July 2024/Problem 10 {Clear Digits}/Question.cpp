@@ -60,21 +60,20 @@ class Solution {
 public:   
    
      string clearDigits(string s) {
-         int idx=-1;
+          int idx=-1;
          for(int i=0;i<s.size();i++){
             if(s[i]>=48 && s[i]<=57){
                 idx=i;
                 break;
             }
          }
-         cout<<idx<<endl;
          if(idx==-1) return s;
          else {
             string left=s.substr(0,idx-1);
             string right=s.substr(idx+1,s.size()-1);
-            clearDigits(left+right);
+             return clearDigits(left+right);
          }
-         return "";
+        return "";
       }
       
      
@@ -84,7 +83,7 @@ public:
 
 
 int main(){
-  string s="cb34";
+  string s="c8f";
  
     Solution solution; 
    string ans=solution.clearDigits(s);
