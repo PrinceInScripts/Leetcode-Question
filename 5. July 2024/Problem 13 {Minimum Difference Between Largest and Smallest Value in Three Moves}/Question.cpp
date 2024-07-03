@@ -65,18 +65,14 @@ public:
            
        
        int minDifference(vector<int>& nums) {
+        int n=nums.size();
+        if(n<=4) return 0;
         sort(nums.begin(),nums.end());
-
-        int num=nums[0];
-        int j=nums.size()-1,count=0;
-        while(count<3){
-            nums[j]=num;
-            j--;
-            count++;
+        int ans=nums[n-1]-nums[0];
+        for(int i=0;i<=3;i++){
+            ans=min(ans,nums[n-(3-i)-1]-nums[i]);
         }
-        int minElement=*min_element(nums.begin(),nums.end());
-        int maxElement=*max_element(nums.begin(),nums.end());
-        return maxElement-minElement;
+        return ans;
     }
 
       
