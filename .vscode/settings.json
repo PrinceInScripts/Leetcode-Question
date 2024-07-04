@@ -7,6 +7,7 @@
     "unordered_map": "cpp",
     "vector": "cpp",
     "initializer_list": "cpp",
-    "*.tcc": "cpp"
+    "*.tcc": "cpp",
+    "new": "cpp"
   }
 }
