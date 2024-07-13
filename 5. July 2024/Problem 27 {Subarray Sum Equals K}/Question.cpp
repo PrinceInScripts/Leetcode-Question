@@ -44,22 +44,16 @@ using namespace std;
 class Solution {
 public:   
       int subarraySum(vector<int>& nums, int k) {
-        int n=nums.size();
-
-        for(int i=1;i<n;i++){
-            nums[i]=nums[i]+nums[i-1];
+        int count=0;
+        int sum=0;
+        unordered_map<int,int> map;
+        map.insert({0,1});
+        for(int el:nums){
+            sum+=el;
+            count+=map[sum-k];
+            map[sum]++;
         }
-        int i=0,j=1,count=0;
-        int sum=nums[0];
-        while(j<n){
-            if(sum==k) count++;
-            if(i==0) sum=nums[j];
-            else {
-                sum=nums[j]-nums[i-1];
-            }
-            j++;
-        }
-
+        return count;
       } 
       
 };
