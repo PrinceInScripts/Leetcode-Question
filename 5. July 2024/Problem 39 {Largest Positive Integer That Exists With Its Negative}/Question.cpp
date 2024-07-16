@@ -43,7 +43,7 @@ using namespace std;
 
 class Solution {
 public:   
-     int findMaxK(vector<int>& nums) {
+     int findMaxK1(vector<int>& nums) {
        unordered_map<int,int> map;
        for(int i=0;i<nums.size();i++){
             int num=abs(nums[i]);
@@ -56,6 +56,21 @@ public:
          if(el.second==2){
             maxK=max(maxK,el.first);
          }
+       }
+       return maxK;
+    }    
+     int findMaxK(vector<int>& nums) {
+       sort(nums.begin(),nums.end());
+       int i=0;
+       int j=nums.size()-1;
+       int maxK=-1;
+       while(nums[i]<0 && nums[j]>0){
+             if(abs(nums[i])==nums[j]){
+                maxK=nums[j];
+                break;
+             } else if(abs(nums[i])<nums[j]) j--;
+             else if(abs(nums[i])>nums[j]) i++;
+             
        }
        return maxK;
     }    
