@@ -8,6 +8,7 @@
     "vector": "cpp",
     "initializer_list": "cpp",
     "*.tcc": "cpp",
-    "new": "cpp"
+    "new": "cpp",
+    "random": "cpp"
   }
 }
