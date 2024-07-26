@@ -59,7 +59,7 @@ void display(ListNode* head){
 
 class Solution {
 public:
-    ListNode* removeNthFromEnd(ListNode* head, int n) {
+    ListNode* removeNthFromEnd1(ListNode* head, int n) {
         int len=0;
         ListNode* temp=head;
         while(temp!=NULL){
@@ -78,6 +78,23 @@ public:
         temp->next=temp->next->next;
         return head;
     }
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* slow=head;
+        ListNode* fast=head;
+        for(int i=1;i<=n+1;i++){
+            if(fast==NULL) {
+                head=head->next;
+                return head;
+            }
+          fast=fast->next;
+        }
+       while(fast!=NULL){
+        slow=slow->next;
+        fast=fast->next;
+       }
+       slow->next=slow->next->next;
+       return head;
+    }
    
     
 };
@@ -85,21 +102,21 @@ public:
 int main(){
     ListNode* a=new ListNode(1);
     ListNode* b=new ListNode(3);
-    // ListNode* c=new ListNode(4);
-    // ListNode* d=new ListNode(7);
-    // ListNode* e=new ListNode(1);
-    // ListNode* f=new ListNode(2);
-    // ListNode* g=new ListNode(6);
+    ListNode* c=new ListNode(4);
+    ListNode* d=new ListNode(7);
+    ListNode* e=new ListNode(1);
+    ListNode* f=new ListNode(2);
+    ListNode* g=new ListNode(6);
     a->next=b;
-    // b->next=c;
-    // c->next=d;
-    // d->next=e;
-    // e->next=f;
-    // f->next=g;
+    b->next=c;
+    c->next=d;
+    d->next=e;
+    e->next=f;
+    f->next=g;
     display(a);
 
     Solution s1;
-    ListNode* ans=s1.removeNthFromEnd(a,1);
+    ListNode* ans=s1.removeNthFromEnd(a,2);
     display(a);
     // cout<<ans;
  
