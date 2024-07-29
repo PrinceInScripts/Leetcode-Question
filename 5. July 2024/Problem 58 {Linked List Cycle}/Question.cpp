@@ -69,7 +69,7 @@ void display(ListNode* head){
 
 class Solution {
 public:
-     bool hasCycle(ListNode *head) {
+     bool hasCycle1(ListNode *head) {
         ListNode* temp=head;
         unordered_set<ListNode*> map;
         
@@ -85,6 +85,18 @@ public:
 
         
         return false;
+       
+    }
+     bool hasCycle(ListNode *head) {
+       ListNode* fast=head;
+       ListNode* slow=head;
+
+       while(fast!=NULL && fast->next!=NULL){
+         slow=slow->next;
+         fast=fast->next->next;
+         if(slow==fast) return true;
+       }
+       return false;
        
     }
     
