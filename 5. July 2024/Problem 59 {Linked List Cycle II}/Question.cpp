@@ -67,7 +67,7 @@ void display(ListNode* head){
 
 class Solution {
 public:
-   ListNode *detectCycle(ListNode *head) {
+   ListNode *detectCycle1(ListNode *head) {
         ListNode* temp=head;
         unordered_set<ListNode*> map;
         
@@ -82,6 +82,31 @@ public:
         }
 
         
+        return NULL;
+       
+    }
+     
+   ListNode *detectCycle(ListNode *head) {
+        ListNode* fast=head;
+        ListNode* slow=head;
+        bool flag=false;
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+            if(slow==fast){
+                flag=true;
+                break;
+            }
+        }
+        if(!flag) return NULL;
+        ListNode* temp=head;
+        while(1){
+            if(temp==slow) return temp;
+            else {
+                temp=temp->next;
+                slow=slow->next;
+            }
+        }
         return NULL;
        
     }
