@@ -58,6 +58,7 @@ The number of nodes in the list is in the range [2, 105].
 #include<iostream>
 #include<unordered_set>
 #include<vector>
+#include<limits.h>
 using namespace std;
 
 class ListNode{
@@ -80,6 +81,36 @@ void display(ListNode* head){
 class Solution {
 public:
     vector<int> nodesBetweenCriticalPoints(ListNode* head) {
+       vector<int> local;
+       ListNode* temp=head;
+       int count=2;
+       while(temp->next->next!=NULL){
+
+          if((temp->next->val>temp->val) && (temp->next->val>temp->next->next->val)){
+            local.push_back(count);
+          }
+          if((temp->next->val<temp->val) && (temp->next->val<temp->next->next->val)){
+            local.push_back(count);
+          }
+          temp=temp->next;
+          count++;
+       }
+
+       int minLocal=INT_MAX;
+       int maxLocal;
+       if(local.size()<2) return {-1,-1};
+       else {
+         for(int i=1;i<local.size();i++){
+            minLocal=min(minLocal,local[i]-local[i-1]);
+         }
+         maxLocal=local.back()-local.front();
+       }
+
+       return {minLocal,maxLocal};
+       
+   
+    }
+    vector<int> nodesBetweenCriticalPoints1(ListNode* head) {
        vector<int> local;
        ListNode* temp=head;
        int count=2;
