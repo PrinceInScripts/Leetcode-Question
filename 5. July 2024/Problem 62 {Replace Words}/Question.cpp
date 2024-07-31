@@ -46,6 +46,7 @@ sentence does not have leading or trailing spaces.
 #include<unordered_map>
 #include<unordered_set>
 #include<sstream>
+#include<set>
 #include<regex>
 using namespace std;
 
@@ -61,6 +62,33 @@ public:
         return count==word.size();
     } 
     string replaceWords(vector<string>& dictionary, string sentence) {
+        int n=dictionary.size();
+        set<string> str(dictionary.begin(),dictionary.end());
+
+        stringstream ss(sentence);
+        string temp,ans;
+        while(ss>>temp){
+            bool flag=false;
+            string st;
+            for(auto ch:temp){
+                st+=ch;
+                if(str.count(st)){
+                    flag=true;
+                    break;
+                }
+            }
+
+            if(flag) ans+=st;
+            else ans+=temp;
+            ans+=" ";
+
+        }
+
+        ans.pop_back();
+        return ans;
+       
+      }
+    string replaceWords1(vector<string>& dictionary, string sentence) {
         int n=dictionary.size();
         stringstream ss(sentence);
         string temp;
