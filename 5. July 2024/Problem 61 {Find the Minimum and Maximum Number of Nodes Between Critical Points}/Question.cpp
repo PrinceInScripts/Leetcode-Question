@@ -96,7 +96,7 @@ public:
           count++;
        }
 
-       int minLocal=INT_MAX;
+       int minLocal=INT_MAX; 
        int maxLocal;
        if(local.size()<2) return {-1,-1};
        else {
