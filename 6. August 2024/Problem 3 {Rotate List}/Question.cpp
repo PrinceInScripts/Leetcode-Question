@@ -52,7 +52,7 @@ void display(ListNode* head){
 
 class Solution {
 public:
-   ListNode* rotateRight(ListNode* head, int k) {
+   ListNode* rotateRight1(ListNode* head, int k) {
      if(head==NULL || head->next==NULL) return head;
        ListNode* a;
        ListNode* b;
@@ -83,6 +83,30 @@ public:
        return head;
        
     }
+   ListNode* rotateRight(ListNode* head, int k) {
+     if(head==NULL || head->next==NULL) return head;
+       ListNode* tail;
+       int len=0;
+       ListNode* temp=head;
+       while(temp->next!=NULL){
+          len++;
+          temp=temp->next;
+       }
+
+       len++;
+       tail=temp;
+       k=k%len;
+       if(k==0) return head;
+       temp=head;
+       for(int i=1;i<len-k;i++){
+          temp=temp->next;
+       }
+       tail->next=head;
+       head=temp->next;
+       temp->next=NULL;       
+       
+       return head;
+    }
    
     
 };
@@ -91,21 +115,21 @@ int main(){
     ListNode* a=new ListNode(0);
     ListNode* b=new ListNode(1);
     ListNode* c=new ListNode(2);
-    // ListNode* d=new ListNode(4);
-    // ListNode* e=new ListNode(5);
+    ListNode* d=new ListNode(4);
+    ListNode* e=new ListNode(5);
 
  
 
    a->next=b;
    b->next=c;
-//    c->next=d;
-//    d->next=e;
+   c->next=d;
+   d->next=e;
 
 
     display(a);
 
     Solution s1;
-    ListNode* ans=s1.rotateRight(a,4);
+    ListNode* ans=s1.rotateRight(a,2);
     display(ans);
  
 
