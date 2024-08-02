@@ -52,7 +52,7 @@ void display(ListNode* head){
 
 class Solution {
 public:
-    ListNode* deleteDuplicates(ListNode* head) {
+    ListNode* deleteDuplicates1(ListNode* head) {
         if(head==NULL) return head;
         ListNode* temp=head;
 
@@ -62,6 +62,25 @@ public:
             } else {
                 temp=temp->next;
             }
+        }
+
+        return head;
+       
+    }
+    ListNode* deleteDuplicates(ListNode* head) {
+        if(head==NULL || head->next==NULL) return head;
+
+
+        ListNode* a=head;
+        ListNode* b=a->next;
+
+        while(b!=NULL){
+            while(b!=NULL&& b->val==a->val)
+                b=b->next;
+            
+            a->next=b;
+            a=b;
+            if(b!=NULL) b=b->next;
         }
 
         return head;
