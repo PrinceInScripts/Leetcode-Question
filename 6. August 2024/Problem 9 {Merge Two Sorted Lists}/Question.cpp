@@ -61,6 +61,34 @@ void display(ListNode* head){
 class Solution {
 public:
    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+    
+      ListNode* temp1=list1;
+      ListNode* temp2=list2;
+      ListNode* c=new ListNode(10);
+      ListNode* temp=c;
+      
+
+      while(temp1!=NULL && temp2!=NULL){
+        if(temp1->val<=temp2->val) {
+           ListNode* t=new ListNode(temp1->val);
+           temp->next=t;
+           temp=t;
+           temp1=temp1->next;
+        } else {
+            ListNode* t=new ListNode(temp2->val);
+           temp->next=t;
+           temp=t;
+           temp2=temp2->next;
+        }
+      }
+
+       if(temp1==NULL) temp->next=temp2;
+        else temp->next=temp1;
+
+        return c->next;
+
+    }
+   ListNode* mergeTwoLists1(ListNode* list1, ListNode* list2) {
      if(list1==NULL && list2==NULL) return NULL;
      else if(list1==NULL) return list2;
      else if(list2==NULL) return list1;
@@ -93,13 +121,6 @@ public:
         if(temp2==NULL) temp->next=temp1;
 
         return head;
-
-
-
-    
-   
-
-       
     }
   
    
