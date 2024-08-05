@@ -81,11 +81,11 @@ public:
       return c->next;
    }
   ListNode* sortList(ListNode* head) {
-    if(head==NULL || head->next==NULL) return head;
+    
        ListNode* fast=head;
        ListNode* slow=head;
 
-       if(head->next==NULL) return head;
+      if(head==NULL || head->next==NULL) return head;
 
        while(fast->next!=NULL && fast->next->next!=NULL){
          slow=slow->next;
