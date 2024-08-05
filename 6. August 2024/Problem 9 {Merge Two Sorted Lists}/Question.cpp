@@ -61,47 +61,43 @@ void display(ListNode* head){
 class Solution {
 public:
    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-
      if(list1==NULL && list2==NULL) return NULL;
      else if(list1==NULL) return list2;
      else if(list2==NULL) return list1;
-    
+     
       ListNode* temp1=list1;
       ListNode* temp2=list2;
+      ListNode* head;
+      if(temp1->val<temp2->val){
+         head=temp1;
+         temp1=temp1->next;
+      } else {
+        head=temp2;
+        temp2=temp2->next;
+      }
 
-      while(temp1->next!=NULL && temp2->next!=NULL){
-         if(temp2->val>=temp1->val){
-            ListNode* temp3=temp2->next;
-            ListNode* temp4=temp1->next;
-
-            temp2->next=temp1->next;
-            temp1->next=temp2;
-            temp1=temp4;
-            temp2=temp3;
-         } else {
+      ListNode* temp=head;
+      while(temp1!=NULL && temp2!=NULL){
+        if(temp1->val<temp2->val) {
+            temp->next=temp1;
+            temp=temp->next;
             temp1=temp1->next;
-         }
-      }
-       if(temp2->val>=temp1->val){
-            ListNode* temp3=temp2->next;
-            ListNode* temp4=temp1->next;
-
-            temp2->next=temp1->next;
-            temp1->next=temp2;
-            temp1=temp4;
-            temp2=temp3;
-         } else {
-            temp1=temp1->next;
-         }
-
-      while(temp2!=NULL){
-            temp1->next=temp2;
-      }
-      while(temp1!=NULL){
-        temp2->next=temp1;
+        } else {
+            temp->next=temp2;
+            temp=temp->next;
+            temp2=temp2->next;
+        }
       }
 
-      return list1;
+       if(temp1==NULL) temp->next=temp2;
+        if(temp2==NULL) temp->next=temp1;
+
+        return head;
+
+
+
+    
+   
 
        
     }
