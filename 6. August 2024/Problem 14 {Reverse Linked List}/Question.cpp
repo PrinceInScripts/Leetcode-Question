@@ -108,7 +108,7 @@ public:
 
        return Curr;
     }
-   ListNode* reverseList(ListNode* head) {
+   ListNode* reverseList3(ListNode* head) {
     if(head==NULL || head->next==NULL) return head;
        ListNode* Prev=NULL;
        ListNode* Curr=head;
@@ -122,6 +122,13 @@ public:
        }
 
        return Prev;
+    }
+   ListNode* reverseList(ListNode* head) {
+    if(head==NULL || head->next==NULL) return head;
+    ListNode* newHead=reverseList(head->next);
+          head->next->next=head;
+          head->next=NULL;
+          return newHead;
     }
     
 };
