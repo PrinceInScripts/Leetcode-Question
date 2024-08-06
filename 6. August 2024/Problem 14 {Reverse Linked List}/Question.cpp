@@ -90,7 +90,8 @@ public:
 
         
     }
-   ListNode* reverseList(ListNode* head) {
+
+   ListNode* reverseList2(ListNode* head) {
     if(head==NULL || head->next==NULL) return head;
        ListNode* Prev=NULL;
        ListNode* Curr=head;
@@ -106,10 +107,21 @@ public:
        head->next=NULL;
 
        return Curr;
+    }
+   ListNode* reverseList(ListNode* head) {
+    if(head==NULL || head->next==NULL) return head;
+       ListNode* Prev=NULL;
+       ListNode* Curr=head;
+       ListNode* Next;
 
-       
+       while(Curr!=NULL){
+          Next=Curr->next;
+          Curr->next=Prev;
+          Prev=Curr;
+          Curr=Next;
+       }
 
-        
+       return Prev;
     }
     
 };
