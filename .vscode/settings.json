@@ -9,6 +9,7 @@
     "initializer_list": "cpp",
     "*.tcc": "cpp",
     "new": "cpp",
-    "random": "cpp"
+    "random": "cpp",
+    "ostream": "cpp"
   }
 }
