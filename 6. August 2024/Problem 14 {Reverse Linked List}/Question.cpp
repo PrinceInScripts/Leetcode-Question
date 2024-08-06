@@ -66,7 +66,7 @@ public:
       }
       return temp;
    }
-   ListNode* reverseList(ListNode* head) {
+   ListNode* reverseList1(ListNode* head) {
        ListNode* temp=head;
        int n=0;
        while(temp!=NULL){
@@ -87,6 +87,27 @@ public:
       }
 
       return head;
+
+        
+    }
+   ListNode* reverseList(ListNode* head) {
+    if(head==NULL || head->next==NULL) return head;
+       ListNode* Prev=NULL;
+       ListNode* Curr=head;
+       ListNode* Next=Curr->next;
+
+       while(Next!=NULL){
+         ListNode* t=Next->next;
+          Next->next=Curr;
+          Prev=Curr;
+          Curr=Next;
+          Next=t;
+       }
+       head->next=NULL;
+
+       return Curr;
+
+       
 
         
     }
