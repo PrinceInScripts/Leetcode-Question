@@ -71,7 +71,7 @@ public:
        }
        return Prev;
     }
-    bool isPalindrome(ListNode* head) {
+    bool isPalindrome1(ListNode* head) {
         ListNode* temp=head;
         ListNode* c=new ListNode(10);
         ListNode* tempC=c;
@@ -94,19 +94,41 @@ public:
 
        return true;
     }
+    bool isPalindrome(ListNode* head) {
+       ListNode* slow=head;
+       ListNode* fast=head;
+       while(fast->next!=NULL && fast->next->next!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+       }
+       ListNode* a=slow->next;
+       slow->next=NULL;
+       a=reverse(a);
+       ListNode* b=head;
+       while(a!=NULL && b!=NULL){
+        if(a->val!=b->val) return false;
+        a=a->next;
+        b=b->next;
+       }
+       return true;
+    }
     
 };
 
 int main(){
     ListNode* a=new ListNode(1);
-    ListNode* b=new ListNode(1);
-    ListNode* c=new ListNode(2);
+    ListNode* b=new ListNode(2);
+    ListNode* c=new ListNode(1);
     ListNode* d=new ListNode(1);
+    // ListNode* e=new ListNode(2);
+    // ListNode* f=new ListNode(1);
  
 
    a->next=b;
    b->next=c;
    c->next=d;
+//    d->next=e;
+//    e->next=f;
 
   
    
