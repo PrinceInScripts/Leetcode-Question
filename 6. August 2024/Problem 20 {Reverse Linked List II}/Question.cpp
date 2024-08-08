@@ -94,13 +94,11 @@ public:
         if(a) a->next=NULL;
         c->next=NULL;
 
-        reverse(b);
-        a->next=c;
-        b->next=d;
-        
-
-
-        return head;
+        c=reverse(b);
+        if(a) a->next=c;
+         b->next=d;
+       if(a) return head;
+       return c;
        
 
     }
