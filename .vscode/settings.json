@@ -10,6 +10,7 @@
     "*.tcc": "cpp",
     "new": "cpp",
     "random": "cpp",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "type_traits": "cpp"
   }
 }
