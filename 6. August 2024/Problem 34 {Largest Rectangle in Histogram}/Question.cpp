@@ -44,22 +44,38 @@ using namespace std;
 class Solution {
 public:  
      int largestRectangleArea(vector<int>& heights) {
-           int maxArea=INT_MIN;
            int n=heights.size();
-
-           for(int i=0;i<n;i++){
-              int width=0;
-              int k=i;
-              for(int j=k;j>=0;j--){
-                if(heights[j]>=heights[i]) width++;
-                else break;
-              }
-              for(int j=i+1;j<n;j++){
-                if(heights[j]>=heights[i]) width++;
-                else break;;
-              }
-              maxArea=max(maxArea,(heights[i]*width));
+           vector<int> psi(n);
+           vector<int> nsi(n);
+           
+           //Next Smallest Element
+           stack<int> st1;
+           nsi[n-1]=n;
+           st1.push(n-1);
+           for(int i=n-2;i>=0;i--){
+              while(st1.size()>0 && heights[st1.top()]>=heights[i]) st1.pop();
+              if(st1.size()==0) nsi[i]=n;
+              else nsi[i]=st1.top();
+              st1.push(i);
            }
+
+           //Previous Smallest Element
+           stack<int> st2;
+           psi[0]=-1;
+           st2.push(0);
+           for(int i=1;i<n;i++){
+             while(st2.size()>0 && heights[st2.top()]>=heights[i]) st2.pop();
+             if(st2.size()==0) psi[i]=-1;
+             else psi[i]=st2.top();
+             st2.push(i);
+           }
+           int maxArea=INT_MIN;
+           for(int i=0;i<n;i++){
+              int width=(nsi[i]-psi[i])-1;
+              int area=heights[i]*width;
+              maxArea=max(maxArea,area);
+           }
+           
            return maxArea;
     }
 
