@@ -41,7 +41,7 @@ public:
        this->right=NULL;
       }
 };
-class Solution{
+class Solution1{
     public:
     int level(TreeNode* root){
         if(root==NULL) return 0;
@@ -69,6 +69,30 @@ class Solution{
        vector<vector<int>> ans;
        
         helper(root,ans);
+      
+       return ans;
+    }
+};
+class Solution{
+    public:
+    int levels(TreeNode* root){
+        if(root==NULL) return 0;
+        return 1+(max(levels(root->left),levels(root->right)));
+    }
+     void helper(TreeNode* root,vector<vector<int>>& ans,int level){
+        if(root==NULL) return;
+        ans[level].push_back(root->val);
+        helper(root->left,ans,level+1);
+        helper(root->right,ans,level+1);  
+     }
+     vector<vector<int>> levelOrder(TreeNode* root) {
+       int n=levels(root);
+       vector<vector<int>> ans;
+       for(int i=1;i<=n;i++){
+        vector<int> v;
+        ans.push_back(v);
+       }
+        helper(root,ans,0);
       
        return ans;
     }
