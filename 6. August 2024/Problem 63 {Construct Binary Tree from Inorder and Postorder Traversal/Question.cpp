@@ -49,9 +49,9 @@ class Solution{
     public:
     
     TreeNode* build(vector<int>& inorder,int inLo,int inHi, vector<int>& postorder,int postLo,int postHi){
-        //   if(preLo>preHi) return NULL;
+          if(postLo>postHi) return NULL;
           TreeNode* root=new TreeNode(postorder[postHi]);
-        //   if(preLo==preHi) return root;
+          if(postLo==postHi) return root;
           int idx=inLo;
           while(idx<inHi){
              if(inorder[idx]==postorder[postHi]) break;
