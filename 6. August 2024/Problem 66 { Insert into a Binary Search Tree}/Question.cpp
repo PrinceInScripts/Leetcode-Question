@@ -56,11 +56,11 @@ class Solution1{
      void helper(TreeNode* root,int val){
          if(root->val<val){
             if(root->right==NULL) root->right=new TreeNode(val);
-            else insertIntoBST(root->right,val);
+            else helper(root->right,val);
          } 
          else {
             if(root->left==NULL) root->left=new TreeNode(val);
-            else insertIntoBST(root->left,val);
+            else helper(root->left,val);
          }
      }
      TreeNode* insertIntoBST(TreeNode* root, int val) {
