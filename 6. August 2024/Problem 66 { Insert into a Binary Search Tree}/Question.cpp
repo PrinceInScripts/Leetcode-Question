@@ -51,37 +51,42 @@ public:
 };
 
 
-class Solution{
+class Solution1{
     public:
      void helper(TreeNode* root,int val){
          if(root->val<val){
-            if(root->left==NULL){
-                TreeNode* t=new TreeNode(val);
-                root->left=t;
-            } else if(root->right==NULL){
-                TreeNode* t=new TreeNode(val);
-                root->left=t;
-            } else{
-                 helper(root->right,val);
-                 return;
-            }
+            if(root->right==NULL) root->right=new TreeNode(val);
+            else insertIntoBST(root->right,val);
          } 
-         else if(root->val>val){
-            if(root->left==NULL){
-                TreeNode* t=new TreeNode(val);
-                root->left=t;
-            } else if(root->right==NULL){
-                TreeNode* t=new TreeNode(val);
-                root->left=t;
-            } else{
-                 helper(root->left,val);
-                 return;
-            }
-         } 
+         else {
+            if(root->left==NULL) root->left=new TreeNode(val);
+            else insertIntoBST(root->left,val);
+         }
      }
      TreeNode* insertIntoBST(TreeNode* root, int val) {
        helper(root,val);
        return root;
+        
+    }
+};
+class Solution{
+    public:
+    
+     TreeNode* insertIntoBST(TreeNode* root, int val) {
+        if(root==NULL){
+            root=new TreeNode(val);
+            return root;
+         }
+        else if(root->val<val){
+            if(root->right==NULL) root->right=new TreeNode(val);
+            else insertIntoBST(root->right,val);
+         } 
+         else {
+            if(root->left==NULL)root->left=new TreeNode(val);
+            else insertIntoBST(root->left,val);
+         }
+
+         return root;
         
     }
 };
