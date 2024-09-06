@@ -85,6 +85,24 @@ public:
    
     
     ListNode* modifiedList(vector<int>& nums, ListNode* head) {
+        unordered_set<int> toDelete(nums.begin(),nums.end());
+
+        while(head!=NULL && toDelete.count(head->val)){
+            head=head->next;
+        }
+
+        if(head==NULL) return NULL;
+
+        ListNode* curr=head;
+        while(curr!=NULL && curr->next!=NULL){
+            if(toDelete.count(curr->next->val)){
+                curr->next=curr->next->next;
+            } else{
+                curr=curr->next;
+            }
+        }
+
+        return head;
        
     }
     
@@ -114,9 +132,9 @@ int main(){
    
 
     Solution s1;
-    cout<<s1.modifiedList(nums,a);
-    // ListNode* ans=s1.reverse(a);
-    // display(ans);
+    ListNode* ans=s1.modifiedList(nums,a);
+   
+    display(ans);
  
 
     
