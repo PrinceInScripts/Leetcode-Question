@@ -23,6 +23,8 @@ Output: [1]
 #include <vector>
 #include<algorithm>
 #include <limits.h>
+#include<queue>
+#include<unordered_map>
 using namespace std;
 
 class Solution
@@ -93,7 +95,7 @@ public:
 
     */
      
-     vector<int> topKFrequent(vector<int>& nums, int k) {
+     vector<int> topKFrequent1(vector<int>& nums, int k) {
         sort(nums.begin(),nums.end());
 
         vector<pair<int,int>> freq;
@@ -106,9 +108,9 @@ public:
                 count=1;
             }
         }
-for (const auto& p : freq) {
-    cout << "(" << p.first << ", " << p.second << ")" << endl;
-}
+        for (const auto& p : freq) {
+            cout << "(" << p.first << ", " << p.second << ")" << endl;
+        }
         freq.push_back({nums.back(),count});
         
        sort(freq.begin(), freq.end(), [](const auto& a, const auto& b) {
@@ -122,12 +124,62 @@ for (const auto& p : freq) {
         
         return result;
     }
+     vector<int> topKFrequent2(vector<int>& nums, int k) {
+        sort(nums.begin(),nums.end());
+
+        vector<pair<int,int>> freq;
+        int count=1;
+        for(int i=1;i<nums.size();i++){
+            if(nums[i]==nums[i-1]){
+              count++;
+            } else {
+                freq.push_back({nums[i-1],count});
+                count=1;
+            }
+        }
+        
+        freq.push_back({nums.back(),count});
+        
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+        for(const auto&p:freq){
+            pq.push({p.second,p.first});
+            if(pq.size()>k) pq.pop();
+        }
+
+        vector<int> result;
+        while(pq.size()>0) {
+            result.push_back(pq.top().second); 
+            pq.pop();
+        }
+        
+        return result;
+    }
+     vector<int> topKFrequent(vector<int>& nums, int k) {
+        unordered_map<int,int> freq;
+        for(auto el:nums){
+            freq[el]++;
+        }
+        
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+        for(const auto&p:freq){
+            pq.push({p.second,p.first});
+            if(pq.size()>k) pq.pop();
+        }
+
+        vector<int> result;
+        while(pq.size()>0) {
+            result.push_back(pq.top().second); 
+            pq.pop();
+        }
+        
+        return result;
+    }
 
 };
 
 int main()
 {
-    vector<int> nums = {4,1,-1,2,-1,2,3};
+    vector<int> nums = {1,1,1,2,3,3};
     int k=2;
 
     Solution solution;
