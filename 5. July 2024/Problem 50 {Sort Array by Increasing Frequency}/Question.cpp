@@ -37,11 +37,12 @@ Output: [5,-1,4,4,-6,-6,1,1,1]
 #include<unordered_set>
 #include<sstream>
 #include<regex>
+#include<queue>
 using namespace std;
 
 class Solution {
 public:         
-     vector<int> frequencySort(vector<int>& nums) {
+     vector<int> frequencySort1(vector<int>& nums) {
             unordered_map<int,int> numFreq;
             unordered_set<int> freq;
             vector<int> ans;
@@ -84,13 +85,42 @@ public:
 
            return ans;
       }
+     vector<int> frequencySort(vector<int>& nums) {
+            unordered_map<int,int> freq;
+           for(auto el:nums){
+               freq[el]++;
+           }
+
+           for(auto& el:freq){
+            cout<<el.first<<" "<<el.second<<endl;
+           }
+            
+           priority_queue<pair<int,int>> pq;
+           
+           for(const auto& p:freq){
+               pq.push({-p.second,p.first});
+           }
+           vector<int> ans;
+           while(pq.size()>0){
+            int f=-pq.top().first;
+            int s=pq.top().second;
+            while(f>0){
+                ans.push_back(s);
+                f--;
+            }
+            pq.pop();
+           }
+           
+
+           return ans;
+      }
         
 };
 
 
 int main(){
 //   vector<int> nums={-1,1,-6,4,5,-6,1,4,1};
-  vector<int> nums={1,1,2,2,2,3};
+  vector<int> nums={2,3,1,3,2};
    Solution solution; 
   vector<int> ans= solution.frequencySort(nums);
 
