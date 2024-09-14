@@ -26,13 +26,15 @@ Output: [1,2,3,4]
 #include <iostream>
 #include <vector>
 #include<algorithm>
+#include<unordered_map>
+#include<queue>
 #include <limits.h>
 using namespace std;
 
 class Solution
 {
 public:
-    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+    vector<int> findClosestElements1(vector<int>& arr, int k, int x) {
       int n=arr.size();
       vector<int> ans(k);
 
@@ -118,15 +120,36 @@ public:
 
       
     }
+    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+      unordered_map<int,int> map;
+     
+      priority_queue<pair<int,int>> pq;
+
+      for(auto el:arr){
+        pq.push({abs(el-x),el});
+        if(pq.size()>k) pq.pop();
+      }
+
+      vector<int> ans;
+      while(pq.size()>0){
+        ans.push_back(pq.top().second);
+        pq.pop();
+      }
+
+      sort(ans.begin(),ans.end());
+      return ans;
+      
+    }
    
 
 };
 
 int main()
 {
-   vector<int> arr={0,0,1,2,3,3,4,7,7,8};
-   int k=3;
-   int x=5;
+   vector<int> arr={0,1,1,1,2,3,6,7,8,9};
+  //  vector<int> arr={1,2,3,4,5};
+   int k=9;
+   int x=4;
     
 
     Solution solution;
