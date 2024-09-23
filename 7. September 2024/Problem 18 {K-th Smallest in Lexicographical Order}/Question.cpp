@@ -63,7 +63,7 @@ int getReqNum(long a,long b,long &n){
    
    
 
-};
+}; 
 
 int main()
 {
